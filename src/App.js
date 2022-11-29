@@ -1,28 +1,51 @@
-import './App.css';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Main from './pages/main'
+import Billing from './pages/billing'
+import Register from './pages/register'
+import TOS from './pages/TOS'
+import ForgotPassword from './pages/forgot'
+import Login from './pages/login'
+import Notes from './pages/notes'
+import Create from './pages/create'
+import Result from './pages/result'
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path="/pages"> 
+          <Billing />
+        </Route>
+        <Route path="/billing"> 
+          <Billing />
+        </Route>
+        <Route path="/forgot"> 
+          <ForgotPassword />
+        </Route>
+        <Route path="/TOS"> 
+          <TOS />
+        </Route>
+        <Route path="/login"> 
+          <Login />
+        </Route>
+        <Route path="/register"> 
+          <Register />
+        </Route>
+        <Route path="/notes">
+          <Notes />
+        </Route>
+        <Route path="/create">
+          <Create />
+        </Route>
+        <Route path="/result">
+          <Result />
+        </Route>
+        <Route path="/">
+          <Main />
+        </Route>
+      </Switch>
+    </Router>
   );
 }
 

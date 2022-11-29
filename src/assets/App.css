@@ -1,3 +1,6 @@
+/* 
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:regular,bold,italic&subset=latin,latin-ext');
+
 .App {
   text-align: center;
 }
@@ -28,4 +31,13 @@
 
 .small {
   font-size: 0.75rem;
+} */
+
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500&display=swap');
+
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
+
+h5 {
+  font-family: 'Merriweather', serif;
 }
