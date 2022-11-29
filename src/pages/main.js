@@ -10,7 +10,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import FormPropsTextFields from '../components/MainPageSearch';
-
+import Copyright from '../components/Copyright';
 
 export default function main() {
   return (
@@ -31,18 +31,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 function WelcomeText() {
   return (
    <Box
@@ -65,17 +53,3 @@ function WelcomeText() {
   );
 }
 
-function SearchBar() {
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={2} columns={16}>
-        <Grid xs={8}>
-          <Item>xs=8</Item>
-        </Grid>
-        <Grid xs={8}>
-          <Item>xs=8</Item>
-        </Grid>
-      </Grid>
-    </Box>
-  );
-}

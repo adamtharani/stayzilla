@@ -19,11 +19,11 @@ import AddressForm from '../components/AddressForm';
 import PaymentForm from '../components/PaymentForm';
 import Review from '../components/Review';
 
-export default function ForgotPassword() {
+export default function Billing() {
   return (
     <React.Fragment>
       <ResponsiveAppBar/>
-      <Billing />
+      <BillingBody />
     </React.Fragment>
   );
 }
@@ -45,7 +45,7 @@ function getStepContent(step) {
 
 const theme = createTheme();
 
-function Billing() {
+function BillingBody() {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {

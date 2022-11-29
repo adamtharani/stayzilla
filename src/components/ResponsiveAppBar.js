@@ -15,7 +15,7 @@ import HotelIcon from '@mui/icons-material/Hotel';
 
 const pages = [];
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -35,6 +35,7 @@ function ResponsiveAppBar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
   return (
     <AppBar position="static">

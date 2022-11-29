@@ -13,17 +13,18 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import Copyright from '../components/Copyright';
 
-export default function ForgotPassword() {
+export default function Register() {
   return (
     <React.Fragment>
       <ResponsiveAppBar/>
-      <Register />
+      <RegisterBody />
     </React.Fragment>
   );
 }
 
-function TOS(props: any) {
+function RegisterTOS(props: any) {
     return (
       <Typography variant="body2" color="text.secondary" align="center" {...props}>
         {'Copyright © '}
@@ -34,23 +35,10 @@ function TOS(props: any) {
       </Typography>
     );
 }
-
-function Copyright(props: any) {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Stayzilla
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
-}
   
 const theme = createTheme();
   
-function Register() {
+function RegisterBody() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -135,7 +123,7 @@ function Register() {
                 </Button>
             </Box>
             </Box>
-            <TOS sx={{ mt: 1, mb: 1 }} />
+            <RegisterTOS sx={{ mt: 1, mb: 1 }} />
             <Copyright sx={{ mt: 1, mb: 4 }} />
         </Container>
         </ThemeProvider>

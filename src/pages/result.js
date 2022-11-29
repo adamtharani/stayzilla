@@ -17,23 +17,14 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import FormPropsTextFields from '../components/MainPageSearch';
+import Copyright from '../components/Copyright';
 
 
-import './assets/index.css';
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
+// import styles from './assets/index.css'
+// import '../assets/index.css';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -65,7 +56,7 @@ export default function Album() {
             >
               Best Hotel Finds
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            <Typography className="font-link" align="center" color="text.secondary" paragraph>
               Something short and leading about the collection below—its contents,
               the creator, etc. Make it short and sweet, but not too short so folks
               don&apos;t simply skip over it entirely.
@@ -102,7 +93,8 @@ export default function Album() {
                     <Typography gutterBottom variant="h5" component="h2">
                       Heading
                     </Typography>
-                    <Typography>
+  
+                    <Typography class="text">
                       This is a media card. You can use this section to describe the
                       content.
                     </Typography>

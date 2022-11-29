@@ -13,32 +13,20 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import Copyright from '../components/Copyright';
 
-export default function ForgotPassword() {
+export default function Login() {
   return (
     <React.Fragment>
       <ResponsiveAppBar/>
-      <Login />
+      <LoginBody />
     </React.Fragment>
   );
-}
-
-function Copyright(props: any) {
-    return (
-      <Typography variant="body2" color="text.secondary" align="center" {...props}>
-        {'Copyright © '}
-        <Link color="inherit" href="/">
-          Stayzilla
-        </Link>{' '}
-        {new Date().getFullYear()}
-        {'.'}
-      </Typography>
-    );
 }
   
 const theme = createTheme();
   
-function Login() {
+function LoginBody() {
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);

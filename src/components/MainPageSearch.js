@@ -5,11 +5,23 @@ import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers';
 import { LocalizationProvider } from '@mui/x-date-pickers';
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
 
+import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
 
 
 
 export default function FormPropsTextFields() {
+  const  [value, setValue] = React.useState(null);
+  const [size, setSize] = React.useState('');
+  const handleChange = (event) => {
+    setSize(event.target.value);
+  };
+
   return (
     <Container 
       maxWidth="md"
@@ -29,35 +41,45 @@ export default function FormPropsTextFields() {
             fullWidth
           />
         </Grid>
+
         <Grid md>
-          <TextField
-            city_search
-            id="filled-required"
-            label="Date"
-            defaultValue="Toronto"
-            variant="filled"
-          />
+          <FormControl fullWidth>
+            <InputLabel id="demo-simple-select-label">Bed Size</InputLabel>
+            <Select
+              labelId="demo-simple-select-label"
+              id="demo-simple-select"
+              value={size}
+              label="size"
+              onChange={handleChange}
+        >
+          <MenuItem value={10}>Small</MenuItem>
+          <MenuItem value={20}>Medium</MenuItem>
+          <MenuItem value={30}>Large</MenuItem>
+        </Select>
+      </FormControl>
         </Grid>
+
         <Grid md>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DatePicker
               label="Check-in"
-              /*value={value}
+              value={value}
               onChange={(newValue) => {
                 setValue(newValue);
-              }}*/
+              }}
               renderInput={(params) => <TextField {...params} />}
             />
           </LocalizationProvider>
         </Grid>
+        
         <Grid md>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
               <DatePicker
                 label="Check-out"
-                /*value={value}
+                value={value}
                 onChange={(newValue) => {
                   setValue(newValue);
-                }}*/
+                }}
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>

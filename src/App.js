@@ -1,12 +1,11 @@
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Main from './pages/main'
+import Pages from './pages/pages'
 import Billing from './pages/billing'
 import Register from './pages/register'
 import TOS from './pages/TOS'
 import ForgotPassword from './pages/forgot'
 import Login from './pages/login'
-import Notes from './pages/notes'
-import Create from './pages/create'
 import Result from './pages/result'
 
 
@@ -15,7 +14,7 @@ function App() {
     <Router>
       <Switch>
         <Route path="/pages"> 
-          <Billing />
+          <Pages />
         </Route>
         <Route path="/billing"> 
           <Billing />
@@ -31,12 +30,6 @@ function App() {
         </Route>
         <Route path="/register"> 
           <Register />
-        </Route>
-        <Route path="/notes">
-          <Notes />
-        </Route>
-        <Route path="/create">
-          <Create />
         </Route>
         <Route path="/result">
           <Result />
