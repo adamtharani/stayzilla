@@ -135,6 +135,9 @@ app.get("/auth/is-verify", authorization, async (req, res) => {
   }
 })
 
+
+
+// Functional API
 app.get("/api/v1/accounts", async (req, res, next) => {
     try {
         const accounts = await prisma.account.findMany({
@@ -184,6 +187,38 @@ app.get("/api/v1/room/:id", async (req, res, next) => {
     }
 })
 
+//get available room for given city, size, check in, check out dates
+app.get("/api/v1/avRoom", async (req, res, next) => {
+    try {
+        const { city, size, checkin, checkout } = req.body;
+
+        const avRoom = await prisma.$queryRaw`
+              SELECT * FROM room
+          `;
+        res.status(200).json({ avRoom });
+
+    } catch (error: any) {
+        next(error.message)
+    }
+})
+
+//Booking a room
+app.post("/api/v1/book", async (req, res, next) => {
+    try {
+
+        // const { city, size, checkin, checkout } = req.body;
+
+        // const user: Array<string | number > = await prisma.$queryRaw`
+        // INSERT INTO account (first_name, last_name, email, account_status, username, hash_pass) VALUES
+        // (${firstName}, ${lastName}, ${email}, 1, ${userName}, ${bcryptPassword});
+        // `;
+
+        // res.status(200).json({ room });
+
+    } catch (error: any) {
+        next(error.message)
+    }
+})
 
 
 
@@ -200,165 +235,8 @@ app.get("/api/v1/room/:id", async (req, res, next) => {
 
 
 
-/* --------------------------------------Views------------------------------------------- */
 
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `;
-//         res.status(200).json({ view1 });
 
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
-
-// app.get("/view1", async (req, res, next) => {
-//     try {
-//         const view1 = await prisma.$queryRaw(
-//             Prisma.sql`
-//                 SELECT city_name, hotel_id, chain_id
-//                 FROM hotel AS h, hotel_chain AS hc, city as c
-//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-//             `
-//         );
-//         res.status(200).json({ view1 });
-
-//     } catch (error: any) {
-//         next(error.message)
-//     }
-// })
 
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`)
