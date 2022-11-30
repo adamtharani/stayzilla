@@ -12,7 +12,7 @@ import Result from './pages/result'
 function App() {
   return (
     <Router>
-      <Switch></Switch>
+      <Switch>
         <Route path="/pages"> 
           <Pages />
         </Route>
