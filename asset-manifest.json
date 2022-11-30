@@ -1,15 +1,16 @@
 {
   "files": {
     "main.css": "/stayzilla-frontend/static/css/main.3ef4a896.css",
-    "main.js": "/stayzilla-frontend/static/js/main.830bde5a.js",
+    "main.js": "/stayzilla-frontend/static/js/main.0be70358.js",
     "static/js/787.2dc4bfe2.chunk.js": "/stayzilla-frontend/static/js/787.2dc4bfe2.chunk.js",
+    "static/media/roomPic.jpg": "/stayzilla-frontend/static/media/roomPic.38d4a7730b0fd53a0efe.jpg",
     "index.html": "/stayzilla-frontend/index.html",
     "main.3ef4a896.css.map": "/stayzilla-frontend/static/css/main.3ef4a896.css.map",
-    "main.830bde5a.js.map": "/stayzilla-frontend/static/js/main.830bde5a.js.map",
+    "main.0be70358.js.map": "/stayzilla-frontend/static/js/main.0be70358.js.map",
     "787.2dc4bfe2.chunk.js.map": "/stayzilla-frontend/static/js/787.2dc4bfe2.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.3ef4a896.css",
-    "static/js/main.830bde5a.js"
+    "static/js/main.0be70358.js"
   ]
 }
