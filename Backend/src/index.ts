@@ -2,7 +2,7 @@ import express from "express";
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 
-import { Prisma, PrismaClient } from '@prisma/client';
+import { account, Prisma, PrismaClient } from '@prisma/client';
 
 
 // var usersRouter = require('./routes/users');
@@ -30,7 +30,48 @@ app.use('/', view1Router);
 app.use('/', view2Router);
 
 
+interface accountArr {
+    account_id: number;
+    first_name: string;
+    last_name: string;
+    email: string;
+    phone_num: string;
+    account_status: number;
+    username: string;
+    hash_pass: string;
+    }
 
+
+//Login in a user
+app.post('/login', async (req, res) => {
+    try {
+      //1. destucture the res.body
+      const { email, password } = req.body;
+  
+      //2. check if user doesnt exist (if not throw error)
+      const user: accountArr[] = await prisma.$queryRaw`SELECT * FROM account WHERE email = ${email}`;
+      
+      console.log(user[0])
+      if (user[0] === undefined) {
+        return res.status(401).json("Password or Email is incorrect");
+      }
+  
+      //3. check if the incoming password is the same as the database password
+  
+      const validPassword = await bcrypt.compare(password, user[0].hash_pass);
+  
+      if (!validPassword) {
+        return res.status(401).json("Password or Email is incorrect");
+      }
+  
+      //4. give them jwt token
+      const token = jwtGenerator(user[0].account_id);
+      res.json({ token });
+  
+    } catch (error) {
+      console.error(error);
+    }
+  });
 
 //Create a user
 app.post("/register", async (req, res) => {
@@ -57,16 +98,6 @@ app.post("/register", async (req, res) => {
       const bcryptPassword = await bcrypt.hash(password, salt);
   
       //4. Enter the new user inside our database
-      interface accountArr {
-        account_id: number;
-        first_name: string;
-        last_name: string;
-        email: string;
-        phone_num: string;
-        account_status: number;
-        username: string;
-        hash_pass: string;
-        }
       const user: Array<string | number > = await prisma.$queryRaw`
         INSERT INTO account (first_name, last_name, email, account_status, username, hash_pass) VALUES
         (${firstName}, ${lastName}, ${email}, 1, ${userName}, ${bcryptPassword});

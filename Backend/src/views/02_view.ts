@@ -12,10 +12,16 @@ export default router.get("/view2", async (req, res, next) => {
               GROUP BY room_cost, room_type;
           `;
       JSON.stringify(
-        this,
+        view2,
         (key, value) => (typeof value === 'bigint' ? value.toString() : value) // return everything else unchanged
       )
-      res.status(200).json({ view2 });
+      
+      res.status(200).json(
+        JSON.stringify(
+          {view2},
+          (key, value) => (typeof value === 'bigint' ? value.toString() : value) // return everything else unchanged
+        )
+      );
 
   } catch (error: any) {
       next(error.message)
