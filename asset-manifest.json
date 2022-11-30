@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/stayzilla-frontend/static/css/main.3ef4a896.css",
+    "main.js": "/stayzilla-frontend/static/js/main.830bde5a.js",
+    "static/js/787.2dc4bfe2.chunk.js": "/stayzilla-frontend/static/js/787.2dc4bfe2.chunk.js",
+    "index.html": "/stayzilla-frontend/index.html",
+    "main.3ef4a896.css.map": "/stayzilla-frontend/static/css/main.3ef4a896.css.map",
+    "main.830bde5a.js.map": "/stayzilla-frontend/static/js/main.830bde5a.js.map",
+    "787.2dc4bfe2.chunk.js.map": "/stayzilla-frontend/static/js/787.2dc4bfe2.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3ef4a896.css",
+    "static/js/main.830bde5a.js"
+  ]
+}
