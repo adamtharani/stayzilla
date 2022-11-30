@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import MainPageSearchBar from '../components/MainPageSearchBar';
 import Copyright from '../components/Copyright';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
 
@@ -63,7 +64,7 @@ function HotelSearch() {
    
 
            
-            <Typography sx={{color: "#262626", letterSpacing: "0.2em", textAlign: "center", fontSize: "24px",  fontFamily: "sans-serif", fontStyle: "italic", padding: "40px 0px"}}>
+            <Typography sx={{color: "#262626", letterSpacing: "0.2em", textAlign: "center", fontSize: "24px",  fontFamily: "sans-serif", fontStyle: "italic", padding: "50px 0px"}}>
               is only one click away
             </Typography>
           
@@ -78,25 +79,29 @@ function HotelSearch() {
             </Stack>  */}
           </Container>
         </Box>
-        <Container sx={{ py: 8 }} maxWidth="md">
+        <Container sx={{ py: 0 }} maxWidth="md">
           {/* End hero unit */}
           <Grid container spacing={2}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={6}>
-                <Card variant="outlined" style={{backgroundColor: '#e6f2ff'}}
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column', my: 1}}
+                <Card variant="outlined" style={{backgroundColor: '#e6f2ff', borderRadius: "20px"}}
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column'}}
                 >
                   <CardMedia
                     component="img"
                     sx={{
                       // 16:9
-                      pt: '56.25%',
+                     // padding: '4% 4% 0% 4%',
+                      padding: "4%",
+                      borderRadius: "40px"
+                    
+                      
                     }}
                     image={roomPic}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography sx={{color: "#262626", letterSpacing: "0.12em", fontSize: "22px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase"}}>
+                    <Typography sx={{color: "#262626", letterSpacing: "0.12em", fontSize: "22px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase", textAlign: "center"}}>
                       Hotel Name
                     </Typography>
 
@@ -104,17 +109,16 @@ function HotelSearch() {
                       City 
                     </Typography>
   
-                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", padding: "16px 0"}}>
+                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
                       Address
                     </Typography>
 
-                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", padding: "16px 0"}}>
+                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
                       Phone
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">View</Button>
-                    <Button size="small">Edit</Button>
+                  <Button variant="contained">VIEW</Button> 
                   </CardActions>
                 </Card>
               </Grid>
