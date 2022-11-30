@@ -42,7 +42,7 @@ function WelcomeText() {
       <CssBaseline />
       <Container component="main" sx={{ mt: 8, mb: 2 }} maxWidth="sm">
         <Typography variant="h4" component="h4" gutterBottom>
-          Welcome, "Persons name"
+          Welcome, "Dr. Hafeez"
         </Typography>
         <Typography variant="body1" component="body1" gutterBottom>
           {'Try searching for a city'}
