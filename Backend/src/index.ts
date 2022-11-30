@@ -4,19 +4,20 @@ import logger from 'morgan';
 
 import { Prisma, PrismaClient } from '@prisma/client';
 
-// var indexRouter = require('./routes/index');
+
 // var usersRouter = require('./routes/users');
 import bcrypt from "bcrypt";
 const authorization = require("./middleware/authorization");
 import { jwtGenerator } from './util/jwtGenerator'
 
 import cors from 'cors';
-
 var app = express();
-
 const prisma = new PrismaClient();
-
 const PORT = process.env.PORT || 3000;
+
+// Import views
+import view1Router from './views/01_view';
+import view2Router from './views/02_view';
 
 app.use(cors());
 app.use(logger('dev'));
@@ -24,11 +25,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+/*-------Views-------*/
+app.use('/', view1Router);
+app.use('/', view2Router);
 
-// app.use('/', indexRouter);
 
-// //get users
-// app.use('/users', usersRouter);
 
 
 //Create a user
@@ -79,19 +80,29 @@ app.post("/register", async (req, res) => {
     //   //5. Generating our jwt token
        const token = jwtGenerator(newUser[0].account_id);
   
-    //   res.json({ token });
+       res.json({ token });
   
-      // res.status(201).json({
-      //   status: "success",
-      //   data: {
-      //     user: results.rows[0]
-      //   }
-      // });
+    //   res.status(201).json({
+    //     status: "success",
+    //     data: {
+    //       user: results.rows[0]
+    //     }
+    //   });
   
     } catch (error) {
       console.error(error);
     }
   });
+
+app.get("/auth/is-verify", authorization, async (req, res) => {
+  try {
+    res.json(true)
+
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server Error")
+  }
+})
 
 app.get("/api/v1/accounts", async (req, res, next) => {
     try {
@@ -160,19 +171,19 @@ app.get("/api/v1/room/:id", async (req, res, next) => {
 
 /* --------------------------------------Views------------------------------------------- */
 
-app.get("/view1", async (req, res, next) => {
-    try {
-        const view1 = await prisma.$queryRaw`
-                SELECT city_name, hotel_id, chain_id
-                FROM hotel AS h, hotel_chain AS hc, city as c
-                WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
-            `;
-        res.status(200).json({ view1 });
+// app.get("/view1", async (req, res, next) => {
+//     try {
+//         const view1 = await prisma.$queryRaw`
+//                 SELECT city_name, hotel_id, chain_id
+//                 FROM hotel AS h, hotel_chain AS hc, city as c
+//                 WHERE c.city_id=h.hotel_city_id AND hc.chain_id=h.hotel_chain_id;
+//             `;
+//         res.status(200).json({ view1 });
 
-    } catch (error: any) {
-        next(error.message)
-    }
-})
+//     } catch (error: any) {
+//         next(error.message)
+//     }
+// })
 
 // app.get("/view1", async (req, res, next) => {
 //     try {
@@ -321,3 +332,5 @@ app.get("/view1", async (req, res, next) => {
 app.listen(PORT, () => {
     console.log(`App is listening on port ${PORT}`)
 })
+
+export default prisma;
