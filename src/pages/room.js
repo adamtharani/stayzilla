@@ -33,7 +33,7 @@ export default function main() {
   );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+const cards = [1, 2, 3];
 
 const theme = createTheme();
 
@@ -56,12 +56,12 @@ function HotelSearch() {
             
           { <Typography 
             sx={{color: "#1976d2", letterSpacing: "0.05em", textAlign: "center", fontSize: "84px",  fontFamily: "Lora", paddingTop: "60px"}}>
-              Your Perfect Vacation
+              Get Comfortable
             </Typography>}
         
             <Typography 
             sx={{color: "#262626", letterSpacing: "0.2em", textAlign: "center", fontSize: "24px",  fontFamily: "sans-serif", fontStyle: "italic", padding: "10px 0px 60px 0px"}}>
-                  is only one click away
+                  in a room that's meant for you
             </Typography>
 
           </Container>
@@ -88,25 +88,28 @@ function HotelSearch() {
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography sx={{color: "#262626", letterSpacing: "0.12em", fontSize: "22px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase", textAlign: "center"}}>
-                      Hotel Name
+                      Room Type
                     </Typography>
 
                     <Typography sx={{color: "#262626", letterSpacing: "0.1em", fontSize: "20px", fontWeight: "bold", fontStyle: "italic", fontFamily: "Lora", textTransform: "capitalize", paddingTop: "10px"}}>
-                      City 
+                      Hotel Name
                     </Typography>
   
                     <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
-                      Address
+                      City
                     </Typography>
 
-                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
-                      Phone
+                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "bold", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
+                     Price
                     </Typography>
+
 
                   </CardContent>
 
                   <CardActions sx={{justifyContent: 'center'}}>         
-                    <Button variant="contained" sx={{fontFamily: "sans-serif", padding: "10px 60px",  letterSpacing: "0.12em", fontSize: "18px", marginBottom: "10px"}}>VIEW</Button> 
+                    <Button variant="contained" sx={{fontFamily: "sans-serif", padding: "10px 60px",  letterSpacing: "0.12em", fontSize: "18px", marginBottom: "10px"}}>
+                        BOOK NOW
+                    </Button> 
                   </CardActions>
 
                 </Card>
