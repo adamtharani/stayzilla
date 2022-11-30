@@ -13,10 +13,10 @@ import Button from '@mui/material/Button';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
-export default function FormPropsTextFields() {
+export default function MainPageSearchBar() {
     const [checkInDate, setCheckInDate] = React.useState(null);
     const [checkOutDate, setCheckOutDate] = React.useState(null);
-    const [size, setSize] = React.useState('');
+    const [size, setSize] = React.useState(null);
     const handleChange = (event) => {
         setSize(event.target.value);
     };
@@ -27,7 +27,7 @@ export default function FormPropsTextFields() {
             sx={{
                 border: 1,
                 borderColor: 'grey.500',
-                borderRadius: 5, mt: 5, mb: 5, p: 5,
+                borderRadius: 5, mt: 8, mb: 5, p: 5,
                 backgroundColor: 'grey.50',
             }}
         >
@@ -41,7 +41,7 @@ export default function FormPropsTextFields() {
                     />
                 </Grid>
 
-                <Grid md>
+                <Grid md={2}>
                     <FormControl fullWidth>
                         <InputLabel id="demo-simple-select-label">Bed Size</InputLabel>
                         <Select

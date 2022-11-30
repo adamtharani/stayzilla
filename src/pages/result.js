@@ -13,32 +13,44 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
+import MainPageSearchBar from '../components/MainPageSearchBar';
 import Copyright from '../components/Copyright';
 
 
 
 
 
-// import styles from './assets/index.css'
-// import '../assets/index.css';
+import '../assets/index.css';
+
+import roomPic from '../assets/roomPic.jpg';
+
+
+export default function main() {
+  return (
+    <React.Fragment>
+      <ResponsiveAppBar/>
+      <MainPageSearchBar />
+      <HotelSearch />
+    </React.Fragment>
+  );
+}
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
-export default function Album() {
+function HotelSearch() {
   return (
    
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <ResponsiveAppBar/>
      
       <main>
         {/* Hero unit */}
         <Box
           sx={{
             bgcolor: 'background.paper',
-            pt: 8,
+            pt: 1,
             pb: 6,
           }}
         >
@@ -63,7 +75,7 @@ export default function Album() {
             >
               <Button variant="contained">Main call to action</Button>
               <Button variant="outlined">Secondary action</Button>
-            </Stack> */}
+            </Stack>  */}
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
@@ -72,7 +84,7 @@ export default function Album() {
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={6}>
                 <Card variant="outlined" style={{backgroundColor: '#e6f2ff'}}
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column'}}
+                  sx={{ height: '100%', display: 'flex', flexDirection: 'column', my: 1}}
                 >
                   <CardMedia
                     component="img"
@@ -80,17 +92,24 @@ export default function Album() {
                       // 16:9
                       pt: '56.25%',
                     }}
-                    image="https://source.unsplash.com/random"
+                    image={roomPic}
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography sx={{color: "#262626", letterSpacing: "0.1em", fontSize: "20px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase"}}>
+                    <Typography sx={{color: "#262626", letterSpacing: "0.12em", fontSize: "22px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase"}}>
                       Hotel Name
+                    </Typography>
+
+                    <Typography sx={{color: "#262626", letterSpacing: "0.1em", fontSize: "20px", fontWeight: "bold", fontStyle: "italic", fontFamily: "Lora", textTransform: "capitalize", paddingTop: "10px"}}>
+                      City 
                     </Typography>
   
                     <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", padding: "16px 0"}}>
-                      This is a media card. You can use this section to describe the
-                      content.
+                      Address
+                    </Typography>
+
+                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", padding: "16px 0"}}>
+                      Phone
                     </Typography>
                   </CardContent>
                   <CardActions>

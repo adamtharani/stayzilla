@@ -5,14 +5,14 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
-import FormPropsTextFields from '../components/MainPageSearch';
+import MainPageSearchBar from '../components/MainPageSearchBar';
 
 export default function main() {
   return (
     <React.Fragment>
       <ResponsiveAppBar/>
       <WelcomeText />
-      <FormPropsTextFields />
+      <MainPageSearchBar />
     </React.Fragment>
   );
 }
