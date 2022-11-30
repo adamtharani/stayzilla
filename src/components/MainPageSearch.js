@@ -10,8 +10,9 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-
-import { DateRangePicker } from '@mui/x-date-pickers-pro/DateRangePicker';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
 
@@ -20,6 +21,8 @@ export default function FormPropsTextFields() {
   const [size, setSize] = React.useState('');
   const handleChange = (event) => {
     setSize(event.target.value);
+
+    
   };
 
   return (
@@ -28,12 +31,12 @@ export default function FormPropsTextFields() {
       sx={{
         border: 1, 
         borderColor: 'grey.500', 
-        borderRadius: 1, mt: 2, mb: 2, p: 2,
+        borderRadius: 5, mt: 5, mb: 5, p: 5,
         backgroundColor: 'grey.50',
       }}
       >
-      <Grid container spacing={3}>
-        <Grid md={4}>
+      <Grid container spacing={1}>
+        <Grid md={3.5}>
           <TextField
             city_search
             id="filled-required"
@@ -83,6 +86,11 @@ export default function FormPropsTextFields() {
                 renderInput={(params) => <TextField {...params} />}
               />
             </LocalizationProvider>
+        </Grid>
+        <Grid md>
+          <Stack spacing={1} direction="row-reverse">
+            <Button variant="contained" endIcon={<KeyboardArrowRightIcon/>}>SEARCH</Button>
+          </Stack>
         </Grid>
       </Grid>
     </Container>

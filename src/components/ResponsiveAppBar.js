@@ -41,7 +41,9 @@ function ResponsiveAppBar() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <HotelIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <HotelIcon 
+            href="/" 
+            sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
@@ -58,6 +60,24 @@ function ResponsiveAppBar() {
             }}
           >
             Stayzilla
+          </Typography>
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/pages"
+            sx={{
+              ml: 6,
+              mr: 2,
+              display: { xs: 'none', md: 'flex' },
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.3rem',
+              color: 'inherit',
+              textDecoration: 'none',
+            }}
+          >
+            Site-Map
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>

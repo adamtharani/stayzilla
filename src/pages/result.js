@@ -15,6 +15,8 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import { StyledEngineProvider } from '@mui/material/styles';
+
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import FormPropsTextFields from '../components/MainPageSearch';
 import Copyright from '../components/Copyright';
@@ -46,22 +48,20 @@ export default function Album() {
             pb: 6,
           }}
         >
-          <Container maxWidth="sm">
-            <Typography
-              component="h1"
-              variant="h2"
-              align="center"
-              color="text.primary"
-              gutterBottom
+          <Container>
+          
+      { <Typography sx={{color: "#1976d2", letterSpacing: "0.05em", textAlign: "center", fontSize: "84px",  fontFamily: "Lora"}}
             >
-              Best Hotel Finds
+              Your Perfect Vacation
+            </Typography>}
+   
+
+           
+            <Typography sx={{color: "#262626", letterSpacing: "0.2em", textAlign: "center", fontSize: "24px",  fontFamily: "sans-serif", fontStyle: "italic", padding: "40px 0px"}}>
+              is only one click away
             </Typography>
-            <Typography className="font-link" align="center" color="text.secondary" paragraph>
-              Something short and leading about the collection below—its contents,
-              the creator, etc. Make it short and sweet, but not too short so folks
-              don&apos;t simply skip over it entirely.
-            </Typography>
-            <Stack
+          
+            {/* <Stack
               sx={{ pt: 4 }}
               direction="row"
               spacing={2}
@@ -69,12 +69,12 @@ export default function Album() {
             >
               <Button variant="contained">Main call to action</Button>
               <Button variant="outlined">Secondary action</Button>
-            </Stack>
+            </Stack> */}
           </Container>
         </Box>
         <Container sx={{ py: 8 }} maxWidth="md">
           {/* End hero unit */}
-          <Grid container spacing={4}>
+          <Grid container spacing={2}>
             {cards.map((card) => (
               <Grid item key={card} xs={12} sm={6} md={6}>
                 <Card variant="outlined" style={{backgroundColor: '#e6f2ff'}}
@@ -90,11 +90,11 @@ export default function Album() {
                     alt="random"
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography gutterBottom variant="h5" component="h2">
-                      Heading
+                    <Typography sx={{color: "#262626", letterSpacing: "0.1em", fontSize: "20px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase"}}>
+                      Hotel Name
                     </Typography>
   
-                    <Typography class="text">
+                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", padding: "16px 0"}}>
                       This is a media card. You can use this section to describe the
                       content.
                     </Typography>

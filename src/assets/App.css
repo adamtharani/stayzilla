@@ -33,11 +33,14 @@
   font-size: 0.75rem;
 } */
 
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;500&display=swap');
 
-
-@import url('https://fonts.googleapis.com/css2?family=Merriweather&display=swap');
-
-h5 {
-  font-family: 'Merriweather', serif;
+.mainTitle {
+  font-family: 'Lora', serif;
+  /*font-family: 'Merriweather', serif;*/
+  font-weight: 700;
+  line-height: 110%;
+  text-align: center;
+  letter-spacing: 0.05em;
+  /*color: #20A8F5;*/
+  color: #66ff99;
 }
