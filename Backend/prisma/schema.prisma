@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+model account {
+  account_id     Int       @id @default(autoincrement())
+  first_name     String    @db.VarChar(255)
+  last_name      String    @db.VarChar(255)
+  email          String    @db.VarChar(255)
+  phone_num      String    @db.Char(10)
+  account_status Int?      @default(1)
+  username       String    @db.VarChar(255)
+  hash_pass      String    @db.VarChar(255)
+  booking        booking[]
+}
+
+model booking {
+  booking_id   Int            @id @default(autoincrement())
+  account_id   Int
+  hotel_id     Int
+  check_in     DateTime       @db.Date
+  check_out    DateTime       @db.Date
+  account      account        @relation(fields: [account_id], references: [account_id], onUpdate: Restrict, map: "booking_ibfk_1")
+  hotel        hotel          @relation(fields: [hotel_id], references: [hotel_id], onUpdate: Restrict, map: "booking_ibfk_2")
+  booking_room booking_room[]
+
+  @@index([account_id], map: "account_id")
+  @@index([hotel_id], map: "hotel_id")
+}
+
+model booking_room {
+  booking_id Int
+  room_id    Int
+  booking    booking @relation(fields: [booking_id], references: [booking_id], onUpdate: Restrict, map: "booking_room_ibfk_1")
+  room       room    @relation(fields: [room_id], references: [room_id], onUpdate: Restrict, map: "booking_room_ibfk_2")
+
+  @@id([booking_id, room_id])
+  @@index([room_id], map: "room_id")
+}
+
+model city {
+  city_id         Int     @id @default(autoincrement())
+  city_name       String  @db.VarChar(255)
+  city_province   String  @db.VarChar(255)
+  city_population Int
+  image_filename  String? @db.VarChar(255)
+  hotel           hotel[]
+}
+
+model hotel {
+  hotel_id       Int         @id @default(autoincrement())
+  hotel_chain_id Int
+  hotel_city_id  Int
+  hotel_name     String      @db.VarChar(255)
+  hotel_address  String      @db.VarChar(255)
+  phone_num      String      @db.Char(10)
+  image_filepath String?     @db.VarChar(60)
+  hotel_chain    hotel_chain @relation(fields: [hotel_chain_id], references: [chain_id], onUpdate: Restrict, map: "hotel_ibfk_1")
+  city           city        @relation(fields: [hotel_city_id], references: [city_id], onUpdate: Restrict, map: "hotel_ibfk_2")
+  booking        booking[]
+  room           room[]
+
+  @@index([hotel_chain_id], map: "hotel_chain_id")
+  @@index([hotel_city_id], map: "hotel_city_id")
+}
+
+model hotel_chain {
+  chain_id   Int     @id @default(autoincrement())
+  chain_name String  @db.VarChar(255)
+  legal_name String? @db.VarChar(255)
+  hotel      hotel[]
+}
+
+model room {
+  room_id      Int            @id @default(autoincrement())
+  hotel_id     Int
+  room_num     Int
+  room_cost    Float          @db.Float
+  room_type    String         @db.VarChar(15)
+  hotel        hotel          @relation(fields: [hotel_id], references: [hotel_id], onUpdate: Restrict, map: "room_ibfk_1")
+  booking_room booking_room[]
+
+  @@index([hotel_id], map: "hotel_id")
+}
