@@ -47,11 +47,15 @@ app.post('/login', async (req, res) => {
     try {
       //1. destucture the res.body
       const { email, password } = req.body;
+      console.log(req.body);
+
+      if (req.body.email.length < 1 || req.body.password < 1) {
+        return res.status(400).json("Please provide an email and password");
+      }
   
       //2. check if user doesnt exist (if not throw error)
       const user: accountArr[] = await prisma.$queryRaw`SELECT * FROM account WHERE email = ${email}`;
       
-      console.log(user[0])
       if (user[0] === undefined) {
         return res.status(401).json("Password or Email is incorrect");
       }
