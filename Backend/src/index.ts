@@ -18,6 +18,14 @@ const PORT = process.env.PORT || 3000;
 // Import views
 import view1Router from './views/01_view';
 import view2Router from './views/02_view';
+import view3Router from './views/03_view';
+import view4Router from './views/04_view';
+import view5Router from './views/05_view';
+import view6Router from './views/06_view';
+import view7Router from './views/07_view';
+import view8Router from './views/08_view';
+import view9Router from './views/09_view';
+import view10Router from './views/10_view';
 
 app.use(cors());
 app.use(logger('dev'));
@@ -28,6 +36,14 @@ app.use(cookieParser());
 /*-------Views-------*/
 app.use('/', view1Router);
 app.use('/', view2Router);
+app.use('/', view3Router);
+app.use('/', view4Router);
+app.use('/', view5Router);
+app.use('/', view6Router);
+app.use('/', view7Router);
+app.use('/', view8Router);
+app.use('/', view9Router);
+app.use('/', view10Router);
 
 
 interface accountArr {
