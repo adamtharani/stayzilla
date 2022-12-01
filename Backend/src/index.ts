@@ -77,10 +77,10 @@ app.post('/login', async (req, res) => {
 app.post("/register", async (req, res) => {
   
     try {
-  
+        console.debug(req.body);
       //1. destructure the req.body (not needed yet)
-      const { firstName, lastName, email, userName, password } = req.body;
-  
+      const { first_name, last_name, email, username, password } = req.body;
+
       //2. check if user exist (if users does then throw error)
       const results: Array<string | number > = await prisma.$queryRaw`
         SELECT * FROM account WHERE email = ${email};
@@ -100,7 +100,7 @@ app.post("/register", async (req, res) => {
       //4. Enter the new user inside our database
       const user: Array<string | number > = await prisma.$queryRaw`
         INSERT INTO account (first_name, last_name, email, account_status, username, hash_pass) VALUES
-        (${firstName}, ${lastName}, ${email}, 1, ${userName}, ${bcryptPassword});
+        (${first_name}, ${last_name}, ${email}, 1, ${username}, ${bcryptPassword});
         `;
 
       const newUser: accountArr[] = await prisma.$queryRaw`
@@ -127,7 +127,7 @@ app.post("/register", async (req, res) => {
 
 app.get("/auth/is-verify", authorization, async (req, res) => {
   try {
-    res.json(true)
+    res.status(200).json(true);
 
   } catch (error) {
     console.error(error);

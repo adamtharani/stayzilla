@@ -13,6 +13,8 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import Copyright from '../components/Copyright';
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 export default function Register() {
   return (
@@ -38,13 +40,28 @@ function RegisterTOS(props: any) {
 const theme = createTheme();
   
 function RegisterBody() {
-    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    const history = useHistory();
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-        email: data.get('email'),
-        password: data.get('password'),
-        });
+        var object = {};
+        data.forEach((value, key) => object[key] = value);
+        console.debug(object);
+        await axios.post("http://localhost:3006/register", object, {})
+            .then((res) => {
+                if (res.status === 200) {
+                    localStorage.setItem("token", res.data.token);
+                    history.push("/");
+                    axios.get("http://localhost:3006/register",  {headers: {token: localStorage.token}})
+                        .then((res) => {
+                            if (res.status === 200) {
+
+                            } else {
+                                console.log(res);
+                            }
+                        });
+                }
+            });
     };
 
     return (
@@ -71,11 +88,31 @@ function RegisterBody() {
                 margin="normal"
                 required
                 fullWidth
-                id="name"
-                label="Full Name"
-                name="name"
+                id="first_name"
+                label="First Name"
+                name="first_name"
                 autoComplete="name"
                 autoFocus
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="last_name"
+                    label="Last Name"
+                    name="last_name"
+                    autoComplete="name"
+                    autoFocus
+                />
+                <TextField
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    autoFocus
                 />
                 <TextField
                 margin="normal"
@@ -87,6 +124,7 @@ function RegisterBody() {
                 autoComplete="email"
                 autoFocus
                 />
+
                 <TextField
                 margin="normal"
                 required
