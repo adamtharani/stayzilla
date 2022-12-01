@@ -1,7 +1,7 @@
 import express from "express";
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-
+import jwt from 'jsonwebtoken';
 import { account, Prisma, PrismaClient } from '@prisma/client';
 
 
@@ -70,7 +70,7 @@ app.post('/login', async (req, res) => {
   
       //4. give them jwt token
       const token = jwtGenerator(user[0].account_id);
-      res.json({ token });
+      res.status(200).json({ token });
   
     } catch (error) {
       console.error(error);
@@ -119,7 +119,7 @@ app.post("/register", async (req, res) => {
     //   //5. Generating our jwt token
        const token = jwtGenerator(newUser[0].account_id);
   
-       res.json({ token });
+       res.status(200).json({ token });
   
     //   res.status(201).json({
     //     status: "success",
@@ -180,6 +180,26 @@ app.get("/api/v1/hotel", async (req, res, next) => {
     }
 })
 
+app.get("/api/v1/booking", async (req, res, next) => {
+    try {
+        const booking = await prisma.booking.findMany();
+        res.status(200).json({ booking });
+
+    } catch (error: any) {
+        next(error.message)
+    }
+})
+
+app.get("/api/v1/bookingRoom", async (req, res, next) => {
+    try {
+        const bookingRoom = await prisma.booking_room.findMany();
+        res.status(200).json({ bookingRoom });
+
+    } catch (error: any) {
+        next(error.message)
+    }
+})
+
 
 app.get("/api/v1/room/:id", async (req, res, next) => {
     try {
@@ -222,14 +242,29 @@ app.post("/api/v1/avRoom", async (req, res, next) => {
 app.post("/api/v1/book", async (req, res, next) => {
     try {
 
-        // const { city, size, checkin, checkout } = req.body;
+        const { token, room_id, hotel_id, checkin, checkout } = req.body;
 
-        // const user: Array<string | number > = await prisma.$queryRaw`
-        // INSERT INTO account (first_name, last_name, email, account_status, username, hash_pass) VALUES
-        // (${firstName}, ${lastName}, ${email}, 1, ${userName}, ${bcryptPassword});
-        // `;
+        
+        const decoded = jwt.verify(token, process.env.JWT_SECRET as jwt.Secret);
+        // @ts-ignore
+        const { user, iat, exp } = decoded
 
-        // res.status(200).json({ room });
+        const booking = await prisma.booking.create({
+            data: {
+                account_id: Number(user),
+                hotel_id: Number(hotel_id),
+                check_in: new Date(checkin),
+                check_out: new Date(checkout)
+            }
+        })
+        const { booking_id } = booking
+
+        const bookingRoom: Array<string | number > = await prisma.$queryRaw`
+        INSERT INTO booking_room (booking_id, room_id) VALUES
+        (${booking_id}, ${room_id})
+        `;
+
+        res.status(200).json(true);
 
     } catch (error: any) {
         next(error.message)

@@ -14,18 +14,41 @@ const prisma = new PrismaClient();
 const load = async () => {
   try {
 
-    //Truncates tables
-    await prisma.account.deleteMany()
-    console.log('Deleted records in account table')
+    // //Truncates tables
+    // await prisma.account.deleteMany()
+    // console.log('Deleted records in account table')
 
-    await prisma.booking.deleteMany()
-    console.log('Deleted records in booking table')
+    // await prisma.booking.deleteMany()
+    // console.log('Deleted records in booking table')
+
+    // await prisma.booking_room.deleteMany()
+    // console.log('Deleted records in booking_room table')
+
+    // await prisma.city.deleteMany()
+    // console.log('Deleted records in city table')
+
+    // await prisma.hotel.deleteMany()
+    // console.log('Deleted records in hotel table')
+
+    // await prisma.hotel_chain.deleteMany()
+    // console.log('Deleted records in hotal_chain table')
+
+    // await prisma.room.deleteMany()
+    // console.log('Deleted records in room table')
+
+
+
+
+
 
     await prisma.booking_room.deleteMany()
     console.log('Deleted records in booking_room table')
 
-    await prisma.city.deleteMany()
-    console.log('Deleted records in city table')
+    await prisma.booking.deleteMany()
+    console.log('Deleted records in booking table')
+    
+    await prisma.room.deleteMany()
+    console.log('Deleted records in room table')
 
     await prisma.hotel.deleteMany()
     console.log('Deleted records in hotel table')
@@ -33,8 +56,16 @@ const load = async () => {
     await prisma.hotel_chain.deleteMany()
     console.log('Deleted records in hotal_chain table')
 
-    await prisma.room.deleteMany()
-    console.log('Deleted records in room table')
+    await prisma.city.deleteMany()
+    console.log('Deleted records in city table')
+    
+    await prisma.account.deleteMany()
+    console.log('Deleted records in account table')
+
+
+
+
+
 
     
     //Seeds the Database
