@@ -188,12 +188,17 @@ app.get("/api/v1/room/:id", async (req, res, next) => {
 })
 
 //get available room for given city, size, check in, check out dates
-app.get("/api/v1/avRoom", async (req, res, next) => {
+app.post("/api/v1/avRoom", async (req, res, next) => {
     try {
         const { city, size, checkin, checkout } = req.body;
 
         const avRoom = await prisma.$queryRaw`
-              SELECT * FROM room
+              SELECT * FROM room WHERE hotel_id IN (
+                SELECT hotel_id FROM hotel WHERE hotel_city_id IN (
+                    SELECT city_id FROM city WHERE city_name = ${city}
+                )
+              ) && room_type = ${size}
+              
           `;
         res.status(200).json({ avRoom });
 
