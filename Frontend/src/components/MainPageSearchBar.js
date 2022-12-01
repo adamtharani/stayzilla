@@ -11,18 +11,34 @@ import Select from '@mui/material/Select';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import axios from "axios";
 
 
 export default function MainPageSearchBar() {
     const [checkInDate, setCheckInDate] = React.useState(null);
     const [checkOutDate, setCheckOutDate] = React.useState(null);
     const [size, setSize] = React.useState("");
+    const [city, setCity] = React.useState("");
     const handleChange = (event) => {
         setSize(event.target.value);
     };
 
+    const handleCityChange = (event) => {
+        setCity(event.target.value);
+    }
+
+    const handleSearch = () => {
+        const data = {
+            size: size,
+            city: city,
+            checkin: checkInDate == null ? "" : checkInDate.toString(),
+            checkout: checkOutDate == null ? "" : checkOutDate.toString(),
+        }
+        axios.post("http://localhost:3006/api/v1/avRoom", data, {})
+    }
+
     return (
-        <Container
+        <Container component="form"
             maxWidth="md"
             sx={{
                 border: 1,
@@ -37,6 +53,7 @@ export default function MainPageSearchBar() {
                         id="filled-required"
                         label="City Search"
                         fullWidth
+                        onChange={handleCityChange}
                     />
                 </Grid>
 
@@ -84,7 +101,7 @@ export default function MainPageSearchBar() {
                 </Grid>
                 <Grid md>
                     <Stack spacing={1} direction="row-reverse">
-                        <Button variant="contained" endIcon={<KeyboardArrowRightIcon/>}>SEARCH</Button>
+                        <Button onClick={handleSearch} variant="contained" endIcon={<KeyboardArrowRightIcon/>}>SEARCH</Button>
                     </Stack>
                 </Grid>
             </Grid>
