@@ -85,6 +85,10 @@ app.post("/register", async (req, res) => {
       //1. destructure the req.body (not needed yet)
       const { first_name, last_name, email, username, password } = req.body;
 
+      if (first_name.length < 1 || last_name.length < 1 || email.length < 1 || username.length < 1 || password.length < 1) {
+        return res.status(400).json("Please provide all fields");
+      }
+
       //2. check if user exist (if users does then throw error)
       const results: Array<string | number > = await prisma.$queryRaw`
         SELECT * FROM account WHERE email = ${email};

@@ -16,6 +16,7 @@ import Copyright from '../components/Copyright';
 import axios from "axios";
 import {useHistory} from "react-router-dom";
 import {Alert} from "@mui/material";
+import {useState} from "react";
 
 export default function Register() {
     return (
@@ -41,6 +42,9 @@ function RegisterTOS(props: any) {
 const theme = createTheme();
 
 function RegisterBody() {
+    const [showError, setShowError] = useState(false);
+    const [errorText, setErrorText] = useState("");
+    const Error = () => <Alert severity="error">{errorText}</Alert>;
     const history = useHistory();
     const handleSignUp = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -56,10 +60,15 @@ function RegisterBody() {
                             if (res.status === 200) {
                                 history.push("/");
                             } else {
-                                <Alert severity="error">This is an error alert — check it out!</Alert>
+                                setShowError(true);
+                                setErrorText("Something went wrong while authenticating your account. Please try again later.");
                             }
                         });
                 }
+            })
+            .catch((err) => {
+                setShowError(true);
+                setErrorText(err.response.data);
             });
     };
 
@@ -157,6 +166,7 @@ function RegisterBody() {
                         >
                             Create Account
                         </Button>
+                        {showError ? <Error /> : null}
                     </Box>
                 </Box>
                 <RegisterTOS sx={{mt: 1, mb: 1}}/>
