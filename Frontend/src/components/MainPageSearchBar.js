@@ -16,7 +16,7 @@ import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 export default function MainPageSearchBar() {
     const [checkInDate, setCheckInDate] = React.useState(null);
     const [checkOutDate, setCheckOutDate] = React.useState(null);
-    const [size, setSize] = React.useState(null);
+    const [size, setSize] = React.useState("");
     const handleChange = (event) => {
         setSize(event.target.value);
     };
@@ -34,7 +34,6 @@ export default function MainPageSearchBar() {
             <Grid container spacing={1}>
                 <Grid md={3.5}>
                     <TextField
-                        city_search
                         id="filled-required"
                         label="City Search"
                         fullWidth

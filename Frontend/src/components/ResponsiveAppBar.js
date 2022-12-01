@@ -50,7 +50,7 @@ function ResponsiveAppBar() {
     if (localStorage.key("token") === null) {
         settings.push("Login");
     } else if (localStorage.key("token") !== null) {
-        settings.push('Profile', 'Account', 'Dashboard', 'Logout')
+        settings.push('Logout')
     }
 
     return (
