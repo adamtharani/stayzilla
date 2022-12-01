@@ -63,7 +63,7 @@ function RenderResultsView() {
 
                 });
         });
-        setLoading(false);
+        setTimeout(() => {  setLoading(false); }, 1000);
     }, []);
 
     if (isLoading) {
