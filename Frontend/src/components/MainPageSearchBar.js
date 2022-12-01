@@ -12,13 +12,18 @@ import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import axios from "axios";
+import {useHistory} from "react-router-dom";
 
 
 export default function MainPageSearchBar() {
+    const history = useHistory();
     const [checkInDate, setCheckInDate] = React.useState(null);
     const [checkOutDate, setCheckOutDate] = React.useState(null);
-    const [size, setSize] = React.useState("");
-    const [city, setCity] = React.useState("");
+
+    const savedSize = history.location.state === undefined ? '' : history.location.state.size;
+    const savedCity = history.location.state === undefined ? '' : history.location.state.city;
+    const [size, setSize] = React.useState(savedSize);
+    const [city, setCity] = React.useState(savedCity);
     const handleChange = (event) => {
         setSize(event.target.value);
     };
@@ -35,6 +40,16 @@ export default function MainPageSearchBar() {
             checkout: checkOutDate == null ? "" : checkOutDate.toString(),
         }
         axios.post("http://localhost:3006/api/v1/avRoom", data, {})
+            .then((res) => {
+                if (res.status === 200) {
+                    const rooms = res.data['avRoom'];
+                    history.push("/result", {
+                        rooms: rooms,
+                        city: city,
+                        size: size
+                    });
+                }
+            });
     }
 
     return (
@@ -54,6 +69,7 @@ export default function MainPageSearchBar() {
                         label="City Search"
                         fullWidth
                         onChange={handleCityChange}
+                        value={city}
                     />
                 </Grid>
 
@@ -67,9 +83,9 @@ export default function MainPageSearchBar() {
                             label="size"
                             onChange={handleChange}
                         >
-                            <MenuItem value={10}>Small</MenuItem>
-                            <MenuItem value={20}>Medium</MenuItem>
-                            <MenuItem value={30}>Large</MenuItem>
+                            <MenuItem value="Small">Small</MenuItem>
+                            <MenuItem value="Medium">Medium</MenuItem>
+                            <MenuItem value="Large">Large</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>

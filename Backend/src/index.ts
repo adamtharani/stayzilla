@@ -198,6 +198,7 @@ app.get("/api/v1/room/:id", async (req, res, next) => {
 //get available room for given city, size, check in, check out dates
 app.post("/api/v1/avRoom", async (req, res, next) => {
     try {
+        console.log(req.body);
         const { city, size, checkin, checkout } = req.body;
 
         const avRoom = await prisma.$queryRaw`
@@ -208,6 +209,8 @@ app.post("/api/v1/avRoom", async (req, res, next) => {
               ) && room_type = ${size}
               
           `;
+
+        console.log(avRoom);
         res.status(200).json({ avRoom });
 
     } catch (error: any) {

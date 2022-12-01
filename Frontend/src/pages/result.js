@@ -9,137 +9,216 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {createTheme, ThemeProvider} from '@mui/material/styles';
 
 
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
 import MainPageSearchBar from '../components/MainPageSearchBar';
 import Copyright from '../components/Copyright';
-import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 
 
 import '../assets/index.css';
 
 import roomPic from '../assets/roomPic.jpg';
+import {useHistory} from "react-router-dom";
 
 
-export default function main() {
-  return (
-    <React.Fragment>
-      <ResponsiveAppBar/>
-      <MainPageSearchBar />
-      <HotelSearch />
-    </React.Fragment>
-  );
+export default function Result() {
+
+    return (
+        <React.Fragment>
+            <ResponsiveAppBar/>
+            <MainPageSearchBar/>
+            <HotelSearch/>
+        </React.Fragment>
+    );
 }
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 const theme = createTheme();
 
+
 function HotelSearch() {
-  return (
-   
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-     
-      <main>
-        {/* Hero unit */}
-        <Box
-          sx={{
-            bgcolor: 'background.paper',
-            pt: 1,
-            pb: 6,
-          }}
-        >
-          <Container>
-            
-          { <Typography 
-            sx={{color: "#1976d2", letterSpacing: "0.05em", textAlign: "center", fontSize: "84px",  fontFamily: "Lora", paddingTop: "60px"}}>
-              Your Perfect Vacation
-            </Typography>}
-        
-            <Typography 
-            sx={{color: "#262626", letterSpacing: "0.2em", textAlign: "center", fontSize: "24px",  fontFamily: "sans-serif", fontStyle: "italic", padding: "10px 0px 60px 0px"}}>
-                  is only one click away
-            </Typography>
+    const history = useHistory();
+    const data = history.location.state.rooms;
+    const city = history.location.state.city;
+    const size = history.location.state.size;
+    const cards = [];
+    const [selected, setSelected] = React.useState(null);
+    data.map((room) => {
+        cards.push(room);
 
-          </Container>
+    });
 
-        </Box>
+    const handleBook = () => {
+        console.log(selected);
+        history.push("/billing", {selected: selected});
+    }
 
-        <Container sx={{ py: 0 }} maxWidth="md">
-          {/* End hero unit */}
-          <Grid container spacing={3}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={6}>
-                <Card variant="outlined" style={{backgroundColor: '#e6f2ff', borderRadius: "20px"}}
-                  sx={{ height: '100%', display: 'flex', flexDirection: 'column'}}
-                >
-                  <CardMedia
-                    component="img"
+    return (
+
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
+
+            <main>
+                {/* Hero unit */}
+                <Box
                     sx={{
-                      // 16:9
-                      padding: "4%",
-                      borderRadius: "40px"
+                        bgcolor: 'background.paper',
+                        pt: 1,
+                        pb: 6,
                     }}
-                    image={roomPic}
-                    alt="random"
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography sx={{color: "#262626", letterSpacing: "0.12em", fontSize: "22px", fontWeight: "bold", fontFamily: "Lora", textTransform: "uppercase", textAlign: "center"}}>
-                      Hotel Name
-                    </Typography>
+                >
+                    <Container>
 
-                    <Typography sx={{color: "#262626", letterSpacing: "0.1em", fontSize: "20px", fontWeight: "bold", fontStyle: "italic", fontFamily: "Lora", textTransform: "capitalize", paddingTop: "10px"}}>
-                      City 
-                    </Typography>
-  
-                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
-                      Address
-                    </Typography>
+                        {<Typography
+                            sx={{
+                                color: "#1976d2",
+                                letterSpacing: "0.05em",
+                                textAlign: "center",
+                                fontSize: "84px",
+                                fontFamily: "Lora",
+                                paddingTop: "60px"
+                            }}>
+                            Your Perfect Vacation
+                        </Typography>}
 
-                    <Typography sx={{color: "#262626", letterSpacing: "0.05em", fontSize: "16px", fontWeight: "light", fontFamily: "sans-serif", textTransform: "capitalize", paddingTop: "16px"}}>
-                      Phone
-                    </Typography>
+                        <Typography
+                            sx={{
+                                color: "#262626",
+                                letterSpacing: "0.2em",
+                                textAlign: "center",
+                                fontSize: "24px",
+                                fontFamily: "sans-serif",
+                                fontStyle: "italic",
+                                padding: "10px 0px 60px 0px"
+                            }}>
+                            is only one click away
+                        </Typography>
 
-                  </CardContent>
+                    </Container>
 
-                  <CardActions sx={{justifyContent: 'center'}}>         
-                    <Button variant="contained" sx={{fontFamily: "sans-serif", padding: "10px 60px",  letterSpacing: "0.12em", fontSize: "18px", marginBottom: "10px"}}>VIEW</Button> 
-                  </CardActions>
+                </Box>
 
-                </Card>
+                <Container sx={{py: 0}} maxWidth="md">
+                    {/* End hero unit */}
+                    <Grid container spacing={3}>
+                        {cards.map((card, index) => (
+                                <Grid item key={card} xs={12} sm={6} md={6}>
+                                    <Card variant="outlined" style={{backgroundColor: '#e6f2ff', borderRadius: "20px"}}
+                                          sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
+                                    >
+                                        <CardMedia
+                                            component="img"
+                                            sx={{
+                                                // 16:9
+                                                padding: "4%",
+                                                borderRadius: "40px"
+                                            }}
+                                            image={roomPic}
+                                            alt="random"
+                                        />
+                                        <CardContent sx={{flexGrow: 1}}>
+                                            <Typography sx={{
+                                                color: "#262626",
+                                                letterSpacing: "0.12em",
+                                                fontSize: "22px",
+                                                fontWeight: "bold",
+                                                fontFamily: "Lora",
+                                                textTransform: "uppercase",
+                                                textAlign: "center"
+                                            }}>
+                                                Hotel Name
+                                            </Typography>
 
-              </Grid>
+                                            <Typography sx={{
+                                                color: "#262626",
+                                                letterSpacing: "0.1em",
+                                                fontSize: "20px",
+                                                fontWeight: "bold",
+                                                fontStyle: "italic",
+                                                fontFamily: "Lora",
+                                                textTransform: "capitalize",
+                                                paddingTop: "10px"
+                                            }}>
+                                                City: {city}
+                                            </Typography>
 
-            ))}
+                                            <Typography sx={{
+                                                color: "#262626",
+                                                letterSpacing: "0.05em",
+                                                fontSize: "16px",
+                                                fontWeight: "light",
+                                                fontFamily: "sans-serif",
+                                                textTransform: "capitalize",
+                                                paddingTop: "16px"
+                                            }}>
+                                                Price: {card.room_cost}
+                                            </Typography>
 
-          </Grid>
+                                            <Typography sx={{
+                                                color: "#262626",
+                                                letterSpacing: "0.05em",
+                                                fontSize: "16px",
+                                                fontWeight: "light",
+                                                fontFamily: "sans-serif",
+                                                textTransform: "capitalize",
+                                                paddingTop: "16px"
+                                            }}>
+                                                Size: {size}
+                                            </Typography>
 
-        </Container>
+                                        </CardContent>
 
-      </main>
-      {/* Footer */}
-      <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
+                                        <CardActions sx={{justifyContent: 'center'}}>
+                                            <Button variant="contained" sx={{
+                                                fontFamily: "sans-serif",
+                                                padding: "10px 60px",
+                                                letterSpacing: "0.12em",
+                                                fontSize: "18px",
+                                                marginBottom: "10px"
+                                            }}
+                                                    onClick={() => {
+                                                        setSelected(card);
+                                                        handleBook();
+                                                        }
+                                                    }
+                                            >
+                                                Book
+                                            </Button>
+                                        </CardActions>
 
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
+                                    </Card>
 
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="text.secondary"
-          component="p"
-        >
-          Something here to give the footer a purpose!
-        </Typography>
+                                </Grid>
 
-        <Copyright />
+                        ))}
 
-      </Box>
-      {/* End footer */}
-    </ThemeProvider>
-  );
+                    </Grid>
+
+                </Container>
+
+            </main>
+            {/* Footer */}
+            <Box sx={{bgcolor: 'background.paper', p: 6}} component="footer">
+
+                <Typography variant="h6" align="center" gutterBottom>
+                    Footer
+                </Typography>
+
+                <Typography
+                    variant="subtitle1"
+                    align="center"
+                    color="text.secondary"
+                    component="p"
+                >
+                    Something here to give the footer a purpose!
+                </Typography>
+
+                <Copyright/>
+
+            </Box>
+            {/* End footer */}
+        </ThemeProvider>
+    );
 }
