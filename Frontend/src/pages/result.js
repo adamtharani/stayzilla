@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useEffect} from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -21,6 +22,7 @@ import '../assets/index.css';
 
 import roomPic from '../assets/roomPic.jpg';
 import {useHistory} from "react-router-dom";
+import axios from "axios";
 
 
 export default function Result() {
@@ -29,7 +31,7 @@ export default function Result() {
         <React.Fragment>
             <ResponsiveAppBar/>
             <MainPageSearchBar/>
-            <HotelSearch/>
+            <RenderResultsView/>
         </React.Fragment>
     );
 }
@@ -38,19 +40,18 @@ export default function Result() {
 const theme = createTheme();
 
 
-function HotelSearch() {
+function RenderResultsView() {
     const history = useHistory();
     const data = history.location.state.rooms;
     const city = history.location.state.city;
     const size = history.location.state.size;
     const cards = [];
-    const [selected, setSelected] = React.useState({});
     data.map((room) => {
         cards.push(room);
-
     });
 
     return (
+
 
         <ThemeProvider theme={theme}>
             <CssBaseline/>
@@ -65,7 +66,6 @@ function HotelSearch() {
                     }}
                 >
                     <Container>
-
                         {<Typography
                             sx={{
                                 color: "#1976d2",
@@ -99,92 +99,95 @@ function HotelSearch() {
                     {/* End hero unit */}
                     <Grid container spacing={3}>
                         {cards.map((card, index) => (
-                                <Grid item key={card} xs={12} sm={6} md={6}>
-                                    <Card variant="outlined" style={{backgroundColor: '#e6f2ff', borderRadius: "20px"}}
-                                          sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
-                                    >
-                                        <CardMedia
-                                            component="img"
-                                            sx={{
-                                                // 16:9
-                                                padding: "4%",
-                                                borderRadius: "40px"
-                                            }}
-                                            image={roomPic}
-                                            alt="random"
-                                        />
-                                        <CardContent sx={{flexGrow: 1}}>
-                                            <Typography sx={{
-                                                color: "#262626",
-                                                letterSpacing: "0.12em",
-                                                fontSize: "22px",
-                                                fontWeight: "bold",
-                                                fontFamily: "Lora",
-                                                textTransform: "uppercase",
-                                                textAlign: "center"
-                                            }}>
-                                                Hotel Name
-                                            </Typography>
 
-                                            <Typography sx={{
-                                                color: "#262626",
-                                                letterSpacing: "0.1em",
-                                                fontSize: "20px",
-                                                fontWeight: "bold",
-                                                fontStyle: "italic",
-                                                fontFamily: "Lora",
-                                                textTransform: "capitalize",
-                                                paddingTop: "10px"
-                                            }}>
-                                                City: {city}
-                                            </Typography>
+                            <Grid item key={card} xs={12} sm={6} md={6}>
+                                <Card variant="outlined" style={{backgroundColor: '#e6f2ff', borderRadius: "20px"}}
+                                      sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
+                                >
+                                    <CardMedia
+                                        component="img"
+                                        sx={{
+                                            // 16:9
+                                            padding: "4%",
+                                            borderRadius: "40px"
+                                        }}
+                                        image={roomPic}
+                                        alt="random"
+                                    />
+                                    <CardContent sx={{flexGrow: 1}}>
+                                        <Typography sx={{
+                                            color: "#262626",
+                                            letterSpacing: "0.12em",
+                                            fontSize: "22px",
+                                            fontWeight: "bold",
+                                            fontFamily: "Lora",
+                                            textTransform: "uppercase",
+                                            textAlign: "center"
+                                        }}>
+                                            HOTEL NAME
 
-                                            <Typography sx={{
-                                                color: "#262626",
-                                                letterSpacing: "0.05em",
-                                                fontSize: "16px",
-                                                fontWeight: "light",
-                                                fontFamily: "sans-serif",
-                                                textTransform: "capitalize",
-                                                paddingTop: "16px"
-                                            }}>
-                                                Price: {card.room_cost}
-                                            </Typography>
 
-                                            <Typography sx={{
-                                                color: "#262626",
-                                                letterSpacing: "0.05em",
-                                                fontSize: "16px",
-                                                fontWeight: "light",
-                                                fontFamily: "sans-serif",
-                                                textTransform: "capitalize",
-                                                paddingTop: "16px"
-                                            }}>
-                                                Size: {size}
-                                            </Typography>
+                                        </Typography>
 
-                                        </CardContent>
+                                        <Typography sx={{
+                                            color: "#262626",
+                                            letterSpacing: "0.1em",
+                                            fontSize: "20px",
+                                            fontWeight: "bold",
+                                            fontStyle: "italic",
+                                            fontFamily: "Lora",
+                                            textTransform: "capitalize",
+                                            paddingTop: "10px"
+                                        }}>
+                                            City: {city}
+                                        </Typography>
 
-                                        <CardActions sx={{justifyContent: 'center'}}>
-                                            <Button variant="contained" sx={{
-                                                fontFamily: "sans-serif",
-                                                padding: "10px 60px",
-                                                letterSpacing: "0.12em",
-                                                fontSize: "18px",
-                                                marginBottom: "10px"
-                                            }}
-                                                    onClick={() => {
-                                                        history.push("/billing", {card: card});
-                                                        }
-                                                    }
-                                            >
-                                                Book
-                                            </Button>
-                                        </CardActions>
+                                        <Typography sx={{
+                                            color: "#262626",
+                                            letterSpacing: "0.05em",
+                                            fontSize: "16px",
+                                            fontWeight: "light",
+                                            fontFamily: "sans-serif",
+                                            textTransform: "capitalize",
+                                            paddingTop: "16px"
+                                        }}>
+                                            Price: {card.room_cost}
+                                        </Typography>
 
-                                    </Card>
+                                        <Typography sx={{
+                                            color: "#262626",
+                                            letterSpacing: "0.05em",
+                                            fontSize: "16px",
+                                            fontWeight: "light",
+                                            fontFamily: "sans-serif",
+                                            textTransform: "capitalize",
+                                            paddingTop: "16px"
+                                        }}>
+                                            Size: {size}
+                                        </Typography>
 
-                                </Grid>
+                                    </CardContent>
+
+                                    <CardActions sx={{justifyContent: 'center'}}>
+                                        <Button variant="contained" sx={{
+                                            fontFamily: "sans-serif",
+                                            padding: "10px 60px",
+                                            letterSpacing: "0.12em",
+                                            fontSize: "18px",
+                                            marginBottom: "10px"
+                                        }}
+                                                onClick={() => {
+                                                    history.push("/billing", {card: card});
+                                                }
+                                                }
+                                        >
+                                            Book
+                                        </Button>
+                                    </CardActions>
+
+                                </Card>
+
+                            </Grid>
 
                         ))}
 

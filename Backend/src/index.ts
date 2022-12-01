@@ -180,6 +180,20 @@ app.get("/api/v1/hotel", async (req, res, next) => {
     }
 })
 
+app.get("/api/v1/hotel/:id", async (req, res, next) => {
+    try {
+        const hotel = await prisma.hotel.findUnique({
+            where: {
+                hotel_id: Number(req.params.id)
+            }
+        });
+        res.status(200).json({ hotel });
+
+    } catch (error: any) {
+        next(error.message)
+    }
+})
+
 app.get("/api/v1/booking", async (req, res, next) => {
     try {
         const booking = await prisma.booking.findMany();
