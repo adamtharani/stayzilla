@@ -44,16 +44,11 @@ function HotelSearch() {
     const city = history.location.state.city;
     const size = history.location.state.size;
     const cards = [];
-    const [selected, setSelected] = React.useState(null);
+    const [selected, setSelected] = React.useState({});
     data.map((room) => {
         cards.push(room);
 
     });
-
-    const handleBook = () => {
-        console.log(selected);
-        history.push("/billing", {selected: selected});
-    }
 
     return (
 
@@ -179,8 +174,7 @@ function HotelSearch() {
                                                 marginBottom: "10px"
                                             }}
                                                     onClick={() => {
-                                                        setSelected(card);
-                                                        handleBook();
+                                                        history.push("/billing", {card: card});
                                                         }
                                                     }
                                             >

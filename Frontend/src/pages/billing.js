@@ -16,6 +16,7 @@ import Copyright from '../components/Copyright';
 import AddressForm from '../components/AddressForm';
 import PaymentForm from '../components/PaymentForm';
 import Review from '../components/Review';
+import {useHistory} from "react-router-dom";
 
 export default function Billing() {
   return (
@@ -28,14 +29,14 @@ export default function Billing() {
 
 const steps = ['Billing address', 'Payment details', 'Review your order'];
 
-function getStepContent(step) {
+function getStepContent(step, selected) {
   switch (step) {
     case 0:
       return <AddressForm />;
     case 1:
       return <PaymentForm />;
     case 2:
-      return <Review />;
+      return <Review parentToChild={selected}/>;
     default:
       throw new Error('Unknown step');
   }
@@ -53,6 +54,10 @@ function BillingBody() {
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
+
+  const history = useHistory();
+  const selected = history.location.state.card;
+  console.log(selected);
 
   return (
     <ThemeProvider theme={theme}>
@@ -92,7 +97,7 @@ function BillingBody() {
             </React.Fragment>
           ) : (
             <React.Fragment>
-              {getStepContent(activeStep)}
+              {getStepContent(activeStep, selected)}
               <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                 {activeStep !== 0 && (
                   <Button onClick={handleBack} sx={{ mt: 3, ml: 1 }}>
