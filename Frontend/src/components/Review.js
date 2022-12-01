@@ -46,14 +46,14 @@ export default function Review(parentToChild) {
       </Typography>
       <List disablePadding>
           <ListItem  sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={data.room_type} secondary={data.room_num} />
-            <Typography variant="body2">{data.room_cost}</Typography>
+            <ListItemText primary={"Room Size: " + data.room_type} secondary={"Room Number: " + data.room_num} />
+            <Typography variant="body2">{"$"+ data.room_cost + ".00"}</Typography>
           </ListItem>
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            {data.room_cost}
+            {"$"+ data.room_cost + ".00"}
           </Typography>
         </ListItem>
       </List>

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -46,9 +46,29 @@ function RenderResultsView() {
     const city = history.location.state.city;
     const size = history.location.state.size;
     const cards = [];
+    const [myIndex, setMyIndex] = useState(0);
     data.map((room) => {
         cards.push(room);
     });
+
+    const [hotels, setHotels] = useState([]);
+
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(() => {
+        cards.forEach((card, index) => {
+            axios.get('http://localhost:3006/api/v1/hotel/' + card.hotel_id)
+                .then((response) => {
+                    hotels[index] = response.data.hotel;
+
+                });
+        });
+        setLoading(false);
+    }, []);
+
+    if (isLoading) {
+        return <div className="App"></div>;
+    }
 
     return (
 
@@ -99,7 +119,6 @@ function RenderResultsView() {
                     {/* End hero unit */}
                     <Grid container spacing={3}>
                         {cards.map((card, index) => (
-
                             <Grid item key={card} xs={12} sm={6} md={6}>
                                 <Card variant="outlined" style={{backgroundColor: '#e6f2ff', borderRadius: "20px"}}
                                       sx={{height: '100%', display: 'flex', flexDirection: 'column'}}
@@ -124,8 +143,7 @@ function RenderResultsView() {
                                             textTransform: "uppercase",
                                             textAlign: "center"
                                         }}>
-                                            HOTEL NAME
-
+                                            {hotels[index].hotel_name}
 
                                         </Typography>
 
@@ -139,7 +157,7 @@ function RenderResultsView() {
                                             textTransform: "capitalize",
                                             paddingTop: "10px"
                                         }}>
-                                            City: {city}
+                                            Address: {hotels[index].hotel_address}
                                         </Typography>
 
                                         <Typography sx={{
@@ -151,7 +169,19 @@ function RenderResultsView() {
                                             textTransform: "capitalize",
                                             paddingTop: "16px"
                                         }}>
-                                            Price: {card.room_cost}
+                                            Phone Number: {hotels[index].phone_num}
+                                        </Typography>
+
+                                        <Typography sx={{
+                                            color: "#262626",
+                                            letterSpacing: "0.05em",
+                                            fontSize: "16px",
+                                            fontWeight: "light",
+                                            fontFamily: "sans-serif",
+                                            textTransform: "capitalize",
+                                            paddingTop: "16px"
+                                        }}>
+                                            Price: {"$" + card.room_cost + ".00 per night"}
                                         </Typography>
 
                                         <Typography sx={{
