@@ -37,24 +37,23 @@ const payments = [
   { name: 'Expiry date', detail: '04/2024' },
 ];
 
-export default function Review() {
+export default function Review(parentToChild) {
+  const data = parentToChild.parentToChild;
   return (
     <React.Fragment>
       <Typography variant="h6" gutterBottom>
         Order summary
       </Typography>
       <List disablePadding>
-        {products.map((product) => (
-          <ListItem key={product.name} sx={{ py: 1, px: 0 }}>
-            <ListItemText primary={product.name} secondary={product.desc} />
-            <Typography variant="body2">{product.price}</Typography>
+          <ListItem  sx={{ py: 1, px: 0 }}>
+            <ListItemText primary={"Room Size: " + data.room_type} secondary={"Room Number: " + data.room_num} />
+            <Typography variant="body2">{"$"+ data.room_cost + ".00"}</Typography>
           </ListItem>
-        ))}
 
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Total" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            $34.06
+            {"$"+ data.room_cost + ".00"}
           </Typography>
         </ListItem>
       </List>
